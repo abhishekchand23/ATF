@@ -1,0 +1,476 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Class test Metropolis Algorithm (Two Coin Toss)}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Class test: Metropolis Algorithm (Two Coin
+Toss))}\label{class-test-metropolis-algorithm-two-coin-toss}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Metropolis Algorithm}
+        \PY{c+c1}{\PYZsh{} algorithm applied to two parameters called theta1,theta2 defined on the }
+        \PY{c+c1}{\PYZsh{} domain [0,1]x[0,1].}
+        
+        \PY{c+c1}{\PYZsh{} Load the MASS package, which defines the mvrnorm function.}
+        \PY{c+c1}{\PYZsh{} If this \PYZdq{}library\PYZdq{} command balks, you must intall the MASS package:}
+        \PY{c+c1}{\PYZsh{}install.packages(\PYZdq{}MASS\PYZdq{})}
+        \PY{k+kn}{library}\PY{p}{(}MASS\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Define the likelihood function.}
+        \PY{c+c1}{\PYZsh{} The input argument is a vector: theta = c( theta1 , theta2 )}
+        likelihood \PY{o}{=} \PY{k+kr}{function}\PY{p}{(} theta \PY{p}{)} \PY{p}{\PYZob{}}
+        	\PY{c+c1}{\PYZsh{} Data are constants, specified here:}
+        	z1 \PY{o}{=} \PY{l+m}{32} \PY{p}{;} N1 \PY{o}{=} \PY{l+m}{100} \PY{p}{;} z2 \PY{o}{=} \PY{l+m}{70} \PY{p}{;} N2 \PY{o}{=} \PY{l+m}{100}
+        	likelihood \PY{o}{=} \PY{p}{(} theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{\PYZca{}}z1 \PY{o}{*} \PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{p}{(}N1\PY{o}{\PYZhy{}}z1\PY{p}{)}
+                         \PY{o}{*} theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{\PYZca{}}z2 \PY{o}{*} \PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{p}{(}N2\PY{o}{\PYZhy{}}z2\PY{p}{)} \PY{p}{)}
+        	\PY{k+kr}{return}\PY{p}{(} likelihood \PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Define the prior density function.}
+        \PY{c+c1}{\PYZsh{} The input argument is a vector: theta = c( theta1 , theta2 )}
+        prior \PY{o}{=} \PY{k+kr}{function}\PY{p}{(} theta \PY{p}{)} \PY{p}{\PYZob{}}
+        	\PY{c+c1}{\PYZsh{} Here\PYZsq{}s a beta\PYZhy{}beta prior:}
+        	a1 \PY{o}{=} \PY{l+m}{3} \PY{p}{;} b1 \PY{o}{=} \PY{l+m}{3} \PY{p}{;} a2 \PY{o}{=} \PY{l+m}{3} \PY{p}{;} b2 \PY{o}{=} \PY{l+m}{3}
+        	prior \PY{o}{=} dbeta\PY{p}{(} theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{p}{,} a1 \PY{p}{,} b1\PY{p}{)} \PY{o}{*} dbeta\PY{p}{(} theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{p}{,} a2 \PY{p}{,} b2\PY{p}{)} 
+        	\PY{k+kr}{return}\PY{p}{(} prior \PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Define the relative probability of the target distribution, as a function }
+        \PY{c+c1}{\PYZsh{} of theta.  The input argument is a vector: theta = c( theta1 , theta2 ). }
+        \PY{c+c1}{\PYZsh{} For our purposes, the value returned is the UNnormalized posterior prob.}
+        targetRelProb \PY{o}{=} \PY{k+kr}{function}\PY{p}{(} theta \PY{p}{)} \PY{p}{\PYZob{}}
+        	\PY{k+kr}{if} \PY{p}{(} \PY{k+kp}{all}\PY{p}{(} theta \PY{o}{\PYZgt{}=} \PY{l+m}{0.0} \PY{p}{)} \PY{o}{\PYZam{}} \PY{k+kp}{all}\PY{p}{(} theta \PY{o}{\PYZlt{}=} \PY{l+m}{1.0} \PY{p}{)} \PY{p}{)} \PY{p}{\PYZob{}}
+        		targetRelProbVal \PY{o}{=}  likelihood\PY{p}{(} theta \PY{p}{)} \PY{o}{*} prior\PY{p}{(} theta \PY{p}{)}
+        	\PY{p}{\PYZcb{}} \PY{k+kr}{else} \PY{p}{\PYZob{}}
+        		\PY{c+c1}{\PYZsh{} This part is important so that the Metropolis algorithm}
+        		\PY{c+c1}{\PYZsh{} never accepts a jump to an invalid parameter value.}
+        		targetRelProbVal \PY{o}{=} \PY{l+m}{0.0}
+        	\PY{p}{\PYZcb{}}
+        	\PY{k+kr}{return}\PY{p}{(} targetRelProbVal \PY{p}{)}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} Specify the length of the trajectory, i.e., the number of jumps to try.}
+        trajLength \PY{o}{=} \PY{k+kp}{ceiling}\PY{p}{(} \PY{l+m}{10000} \PY{o}{/} \PY{l+m}{.9} \PY{p}{)} \PY{c+c1}{\PYZsh{} arbitrary large number}
+        \PY{c+c1}{\PYZsh{} Initialize the vector that will store the results.}
+        trajectory \PY{o}{=} \PY{k+kt}{matrix}\PY{p}{(} \PY{l+m}{0} \PY{p}{,} nrow\PY{o}{=}trajLength \PY{p}{,} ncol\PY{o}{=}\PY{l+m}{2} \PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Specify where to start the trajectory}
+        trajectory\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]} \PY{o}{=} \PY{k+kt}{c}\PY{p}{(} \PY{l+m}{0.50} \PY{p}{,} \PY{l+m}{0.50} \PY{p}{)} \PY{c+c1}{\PYZsh{} arbitrary start values of the two param\PYZsq{}s}
+        \PY{c+c1}{\PYZsh{} Specify the burn\PYZhy{}in period.}
+        burnIn \PY{o}{=} \PY{k+kp}{ceiling}\PY{p}{(} \PY{l+m}{.1} \PY{o}{*} trajLength \PY{p}{)} \PY{c+c1}{\PYZsh{} arbitrary number}
+        \PY{c+c1}{\PYZsh{} Initialize accepted, rejected counters, just to monitor performance.}
+        nAccepted \PY{o}{=} \PY{l+m}{0}
+        nRejected \PY{o}{=} \PY{l+m}{0}
+        \PY{c+c1}{\PYZsh{} Specify the seed, so the trajectory can be reproduced.}
+        \PY{k+kp}{set.seed}\PY{p}{(}\PY{l+m}{47405}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Specify the covariance matrix for multivariate normal proposal distribution.}
+        nDim \PY{o}{=} \PY{l+m}{2} \PY{p}{;} sd1 \PY{o}{=} \PY{l+m}{0.2} \PY{p}{;} sd2 \PY{o}{=} \PY{l+m}{0.2}
+        covarMat \PY{o}{=} \PY{k+kt}{matrix}\PY{p}{(} \PY{k+kt}{c}\PY{p}{(} sd1\PY{o}{\PYZca{}}\PY{l+m}{2} \PY{p}{,} \PY{l+m}{0.00} \PY{p}{,} \PY{l+m}{0.00} \PY{p}{,} sd2\PY{o}{\PYZca{}}\PY{l+m}{2} \PY{p}{)} \PY{p}{,} nrow\PY{o}{=}nDim \PY{p}{,} ncol\PY{o}{=}nDim \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Now generate the random walk. stepIdx is the step in the walk.}
+        \PY{k+kr}{for} \PY{p}{(} stepIdx \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{p}{(}trajLength\PY{l+m}{\PYZhy{}1}\PY{p}{)} \PY{p}{)} \PY{p}{\PYZob{}}
+        	currentPosition \PY{o}{=} trajectory\PY{p}{[}stepIdx\PY{p}{,}\PY{p}{]}
+        	\PY{c+c1}{\PYZsh{} Use the proposal distribution to generate a proposed jump.}
+        	\PY{c+c1}{\PYZsh{} The shape and variance of the proposal distribution can be changed}
+        	\PY{c+c1}{\PYZsh{} to whatever you think is appropriate for the target distribution.}
+        	proposedJump \PY{o}{=} mvrnorm\PY{p}{(} n\PY{o}{=}\PY{l+m}{1} \PY{p}{,} mu\PY{o}{=}\PY{k+kp}{rep}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}nDim\PY{p}{)}\PY{p}{,} Sigma\PY{o}{=}covarMat \PY{p}{)}
+        	\PY{c+c1}{\PYZsh{} Compute the probability of accepting the proposed jump.}
+        	probAccept \PY{o}{=} \PY{k+kp}{min}\PY{p}{(} \PY{l+m}{1}\PY{p}{,}
+        		targetRelProb\PY{p}{(} currentPosition \PY{o}{+} proposedJump \PY{p}{)}
+        		\PY{o}{/} targetRelProb\PY{p}{(} currentPosition \PY{p}{)} \PY{p}{)}
+        	\PY{c+c1}{\PYZsh{} Generate a random uniform value from the interval [0,1] to}
+        	\PY{c+c1}{\PYZsh{} decide whether or not to accept the proposed jump.}
+        	\PY{k+kr}{if} \PY{p}{(} runif\PY{p}{(}\PY{l+m}{1}\PY{p}{)} \PY{o}{\PYZlt{}} probAccept \PY{p}{)} \PY{p}{\PYZob{}}
+        		\PY{c+c1}{\PYZsh{} accept the proposed jump}
+        		trajectory\PY{p}{[} stepIdx\PY{l+m}{+1} \PY{p}{,} \PY{p}{]} \PY{o}{=} currentPosition \PY{o}{+} proposedJump
+        		\PY{c+c1}{\PYZsh{} increment the accepted counter, just to monitor performance}
+        		\PY{k+kr}{if} \PY{p}{(} stepIdx \PY{o}{\PYZgt{}} burnIn \PY{p}{)} \PY{p}{\PYZob{}} nAccepted \PY{o}{=} nAccepted \PY{o}{+} \PY{l+m}{1} \PY{p}{\PYZcb{}}
+        	\PY{p}{\PYZcb{}} \PY{k+kr}{else} \PY{p}{\PYZob{}}
+        		\PY{c+c1}{\PYZsh{} reject the proposed jump, stay at current position}
+        		trajectory\PY{p}{[} stepIdx\PY{l+m}{+1} \PY{p}{,} \PY{p}{]} \PY{o}{=} currentPosition
+        		\PY{c+c1}{\PYZsh{} increment the rejected counter, just to monitor performance}
+        		\PY{k+kr}{if} \PY{p}{(} stepIdx \PY{o}{\PYZgt{}} burnIn \PY{p}{)} \PY{p}{\PYZob{}} nRejected \PY{o}{=} nRejected \PY{o}{+} \PY{l+m}{1} \PY{p}{\PYZcb{}}
+        	\PY{p}{\PYZcb{}}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} End of Metropolis algorithm.}
+        
+        \PY{c+c1}{\PYZsh{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+        \PY{c+c1}{\PYZsh{} Begin making inferences by using the sample generated by the}
+        \PY{c+c1}{\PYZsh{} Metropolis algorithm.}
+        
+        \PY{c+c1}{\PYZsh{} Extract just the post\PYZhy{}burnIn portion of the trajectory.}
+        acceptedTraj \PY{o}{=} trajectory\PY{p}{[} \PY{p}{(}burnIn\PY{l+m}{+1}\PY{p}{)} \PY{o}{:} \PY{k+kp}{dim}\PY{p}{(}trajectory\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{p}{,} \PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Compute the mean of the accepted points.}
+        meanTraj \PY{o}{=}  \PY{k+kp}{apply}\PY{p}{(} acceptedTraj \PY{p}{,} \PY{l+m}{2} \PY{p}{,} mean \PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Compute the standard deviations of the accepted points.}
+        sdTraj \PY{o}{=} \PY{k+kp}{apply}\PY{p}{(} acceptedTraj \PY{p}{,} \PY{l+m}{2} \PY{p}{,} sd \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Display the sampled points}
+        
+        
+        
+        plot\PY{p}{(} acceptedTraj \PY{p}{,} type \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{o\PYZdq{}} \PY{p}{,} xlim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{)} \PY{p}{,} xlab \PY{o}{=} \PY{k+kp}{bquote}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)} \PY{p}{,}
+              ylim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{)} \PY{p}{,} ylab \PY{o}{=} \PY{k+kp}{bquote}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)} \PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{pink\PYZdq{}} \PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Display means and rejected/accepted ratio in plot.}
+        \PY{k+kr}{if} \PY{p}{(} meanTraj\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m}{.5} \PY{p}{)} \PY{p}{\PYZob{}} xpos \PY{o}{=} \PY{l+m}{0.0} \PY{p}{;} xadj \PY{o}{=} \PY{l+m}{0.0}
+        \PY{p}{\PYZcb{}} \PY{k+kr}{else} \PY{p}{\PYZob{}} xpos \PY{o}{=} \PY{l+m}{1.0} \PY{p}{;} xadj \PY{o}{=} \PY{l+m}{1.0} \PY{p}{\PYZcb{}}
+        \PY{k+kr}{if} \PY{p}{(} meanTraj\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m}{.5} \PY{p}{)} \PY{p}{\PYZob{}} ypos \PY{o}{=} \PY{l+m}{0.0} \PY{p}{;} yadj \PY{o}{=} \PY{l+m}{0.0}
+        \PY{p}{\PYZcb{}} \PY{k+kr}{else} \PY{p}{\PYZob{}} ypos \PY{o}{=} \PY{l+m}{1.0} \PY{p}{;} yadj \PY{o}{=} \PY{l+m}{1.0} \PY{p}{\PYZcb{}}
+        text\PY{p}{(} xpos \PY{p}{,} ypos \PY{p}{,}	\PY{k+kp}{bquote}\PY{p}{(}
+        	\PY{l+s}{\PYZdq{}}\PY{l+s}{M=\PYZdq{}} \PY{o}{*} \PY{l+m}{.}\PY{p}{(}\PY{k+kp}{signif}\PY{p}{(}meanTraj\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,}\PY{l+m}{3}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+s}{\PYZdq{}}\PY{l+s}{,\PYZdq{}} \PY{o}{*} \PY{l+m}{.}\PY{p}{(}\PY{k+kp}{signif}\PY{p}{(}meanTraj\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,}\PY{l+m}{3}\PY{p}{)}\PY{p}{)}
+        	\PY{o}{*} \PY{l+s}{\PYZdq{}}\PY{l+s}{; \PYZdq{}} \PY{o}{*} N\PY{p}{[}pro\PY{p}{]} \PY{o}{*} \PY{l+s}{\PYZdq{}}\PY{l+s}{=\PYZdq{}} \PY{o}{*} \PY{l+m}{.}\PY{p}{(}\PY{k+kp}{dim}\PY{p}{(}acceptedTraj\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}
+        	\PY{o}{*} \PY{l+s}{\PYZdq{}}\PY{l+s}{, \PYZdq{}} \PY{o}{*} frac\PY{p}{(}N\PY{p}{[}acc\PY{p}{]}\PY{p}{,}N\PY{p}{[}pro\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{l+s}{\PYZdq{}}\PY{l+s}{=\PYZdq{}} 
+        	\PY{o}{*} \PY{l+m}{.}\PY{p}{(}\PY{k+kp}{signif}\PY{p}{(}nAccepted\PY{o}{/}\PY{k+kp}{dim}\PY{p}{(}acceptedTraj\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,}\PY{l+m}{3}\PY{p}{)}\PY{p}{)}
+        	\PY{p}{)} \PY{p}{,} adj\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}xadj\PY{p}{,}yadj\PY{p}{)} \PY{p}{,} cex\PY{o}{=}\PY{l+m}{1.5}  \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Evidence for model, p(D).}
+         \PY{c+c1}{\PYZsh{} Compute a,b parameters for beta distribution that has the same mean}
+         \PY{c+c1}{\PYZsh{} and stdev as the sample from the posterior. This is a useful choice}
+         \PY{c+c1}{\PYZsh{} when the likelihood function is binomial.}
+         a \PY{o}{=}   meanTraj \PY{o}{*} \PY{p}{(} \PY{p}{(}meanTraj\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}meanTraj\PY{p}{)}\PY{o}{/}sdTraj\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{k+kp}{rep}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}nDim\PY{p}{)} \PY{p}{)}
+         b \PY{o}{=} \PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}meanTraj\PY{p}{)} \PY{o}{*} \PY{p}{(} \PY{p}{(}meanTraj\PY{o}{*}\PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}meanTraj\PY{p}{)}\PY{o}{/}sdTraj\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{k+kp}{rep}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}nDim\PY{p}{)} \PY{p}{)}
+         \PY{c+c1}{\PYZsh{} For every theta value in the posterior sample, compute }
+         \PY{c+c1}{\PYZsh{} dbeta(theta,a,b) / likelihood(theta)*prior(theta)}
+         \PY{c+c1}{\PYZsh{} This computation assumes that likelihood and prior are properly normalized,}
+         \PY{c+c1}{\PYZsh{} i.e., not just relative probabilities. }
+         wtd\PYZus{}evid \PY{o}{=} \PY{k+kp}{rep}\PY{p}{(} \PY{l+m}{0} \PY{p}{,} \PY{k+kp}{dim}\PY{p}{(}acceptedTraj\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(} idx \PY{k+kr}{in} \PY{l+m}{1} \PY{o}{:} \PY{k+kp}{dim}\PY{p}{(}acceptedTraj\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{p}{)} \PY{p}{\PYZob{}}
+         	wtd\PYZus{}evid\PY{p}{[}idx\PY{p}{]} \PY{o}{=} \PY{p}{(} dbeta\PY{p}{(} acceptedTraj\PY{p}{[}idx\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{,}a\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{,}b\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{p}{)}
+         		\PY{o}{*} dbeta\PY{p}{(} acceptedTraj\PY{p}{[}idx\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{p}{,}a\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{,}b\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{p}{)} \PY{o}{/}
+         		\PY{p}{(} likelihood\PY{p}{(}acceptedTraj\PY{p}{[}idx\PY{p}{,}\PY{p}{]}\PY{p}{)} \PY{o}{*} prior\PY{p}{(}acceptedTraj\PY{p}{[}idx\PY{p}{,}\PY{p}{]}\PY{p}{)} \PY{p}{)} \PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         pdata \PY{o}{=} \PY{l+m}{1} \PY{o}{/} \PY{k+kp}{mean}\PY{p}{(} wtd\PYZus{}evid \PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Display p(D) in the graph}
+         \PY{c+c1}{\PYZsh{}text( xpos , ypos+(.12*(\PYZhy{}1)\PYZca{}(ypos)) , bquote( \PYZdq{}p(D) = \PYZdq{} * .(signif(pdata,3)) ) ,}
+         \PY{c+c1}{\PYZsh{}	  adj=c(xadj,yadj) , cex=1.5 )}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Change next line if you want to save the graph.}
+         want\PYZus{}saved\PYZus{}graph \PY{o}{=} \PY{k+kc}{FALSE} \PY{c+c1}{\PYZsh{} TRUE or FALSE}
+         \PY{k+kr}{if} \PY{p}{(} want\PYZus{}saved\PYZus{}graph \PY{p}{)} \PY{p}{\PYZob{}} saveGraph\PY{p}{(}file\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{BernTwoMetropolis\PYZdq{}}\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{eps\PYZdq{}}\PY{p}{)} \PY{p}{\PYZcb{}}
+         
+         \PY{c+c1}{\PYZsh{} Estimate highest density region by evaluating posterior at each point.}
+         npts \PY{o}{=} \PY{k+kp}{dim}\PY{p}{(} acceptedTraj \PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]} \PY{p}{;} postProb \PY{o}{=} \PY{k+kp}{rep}\PY{p}{(} \PY{l+m}{0} \PY{p}{,} npts \PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(} ptIdx \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}npts \PY{p}{)} \PY{p}{\PYZob{}}
+             postProb\PY{p}{[}ptIdx\PY{p}{]} \PY{o}{=} targetRelProb\PY{p}{(} acceptedTraj\PY{p}{[}ptIdx\PY{p}{,}\PY{p}{]} \PY{p}{)}
+         \PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{} Determine the level at which credmass points are above:}
+         credmass \PY{o}{=} \PY{l+m}{0.95}
+         waterline \PY{o}{=} quantile\PY{p}{(} postProb \PY{p}{,} probs\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}credmass\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Display highest density region in new graph}
+         
+         plot\PY{p}{(} acceptedTraj\PY{p}{[} postProb \PY{o}{\PYZlt{}} waterline \PY{p}{,} \PY{p}{]} \PY{p}{,} type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{p\PYZdq{}} \PY{p}{,} pch\PY{o}{=}\PY{l+m}{21} \PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{pink\PYZdq{}} \PY{p}{,}
+               xlim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{)} \PY{p}{,} xlab \PY{o}{=} \PY{k+kp}{bquote}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)} \PY{p}{,}
+               ylim \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{)} \PY{p}{,} ylab \PY{o}{=} \PY{k+kp}{bquote}\PY{p}{(}theta\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)} \PY{p}{,}
+               main\PY{o}{=}\PY{k+kp}{paste}\PY{p}{(}\PY{l+m}{100}\PY{o}{*}credmass\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{} HD region\PYZdq{}}\PY{p}{,}sep\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{p}{)}
+         points\PY{p}{(} acceptedTraj\PY{p}{[} postProb \PY{o}{\PYZgt{}=} waterline \PY{p}{,} \PY{p}{]} \PY{p}{,}  pch\PY{o}{=}\PY{l+m}{19} \PY{p}{,} col\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{pink\PYZdq{}} \PY{p}{)}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Change next line if you want to save the graph.}
+         want\PYZus{}saved\PYZus{}graph \PY{o}{=} \PY{k+kc}{FALSE} \PY{c+c1}{\PYZsh{} TRUE or FALSE}
+         \PY{k+kr}{if} \PY{p}{(} want\PYZus{}saved\PYZus{}graph \PY{p}{)} \PY{p}{\PYZob{}} saveGraph\PY{p}{(}file\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{BernTwoMetropolisHD\PYZdq{}}\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{eps\PYZdq{}}\PY{p}{)} \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
